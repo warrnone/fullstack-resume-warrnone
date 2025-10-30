@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ รีเซ็ตและขยายเต็มหน้าจอ */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ✅ ตั้งค่าพื้นหลังและฟอนต์เริ่มต้น */
+body {
+  @apply bg-white text-gray-800 dark:bg-[#0a1929] dark:text-gray-200 font-[Poppins];
+}
+
+/* ✅ สกอลล์ลื่น ๆ */
+html {
+  scroll-behavior: smooth;
+}
