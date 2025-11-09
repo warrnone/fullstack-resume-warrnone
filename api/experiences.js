@@ -7,11 +7,11 @@ export default async function handler(req, res) {
 		await client.connect();
 
 		if (req.method === 'GET') {
-			const result = await client.query(
-				'SELECT * FROM experiences ORDER BY created_at ASC'
-			);
+			// Get
+			const result = await client.query('SELECT * FROM experiences');
 			res.status(200).json(result.rows);
 		} else if (req.method === 'POST') {
+			// post
 			const { company, role, period, description } = req.body;
 			const result = await client.query(
 				`INSERT INTO experiences (company, role, period, description)
