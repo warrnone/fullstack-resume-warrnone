@@ -5,6 +5,32 @@ import { FaBriefcase } from 'react-icons/fa';
 export default function Experience() {
 	const [experiences, setExperiences] = useState([]);
 
+	const [form, setForm] = useState({
+		company: '',
+		role: '',
+		period: '',
+		description: '',
+	}); // ฟังก์ชั่นบรรทึกใน db ชื่อต้องเหมือนกัน
+	const handleSubmit = async (e) => {
+		e.preventDefault(); // หยุดไม่ให้ form reload หน้า
+		// ✅ เราจะจัดการ submit เองด้วย fetch() หรือ axios()
+
+		const res = await fetch('/api/experiences', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(form),
+		});
+
+		if (!res.ok) {
+			alert('❌ Error adding experience');
+			return;
+		}
+
+		const newExp = await res.json();
+		setExperiences((prev) => [newExp, ...prev]); // เพิ่มใน state ทันที
+		setForm({ company: '', role: '', period: '', description: '' });
+	};
+
 	useEffect(() => {
 		fetch('/api/experiences')
 			.then((res) => res.json())

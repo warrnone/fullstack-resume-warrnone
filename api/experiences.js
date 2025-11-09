@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
 		if (req.method === 'GET') {
 			const result = await client.query(
-				'SELECT * FROM experiences ORDER BY created_at DESC'
+				'SELECT * FROM experiences ORDER BY created_at ASC'
 			);
 			res.status(200).json(result.rows);
 		} else if (req.method === 'POST') {
